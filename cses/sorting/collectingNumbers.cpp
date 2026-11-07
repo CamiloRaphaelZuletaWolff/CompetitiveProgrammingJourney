@@ -1,61 +1,53 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-
-
+ 
+ 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
     // freopen("../../input.txt", "r", stdin);
     // freopen("../../output.txt", "w", stdout);
-
+ 
     ll n; cin>>n;
 
-    set<pair<ll,ll>> setsito;
+    vector<pair<ll,ll>> numeritos;
 
     for (ll i = 0; i < n; i++)
     {
         ll a; cin>>a;
-        setsito.insert({a,i});
+        numeritos.push_back({a,i});    
     }
 
-    ll target = 0LL;
-    
-    auto it = setsito.upper_bound({target,0LL});
-        
-    auto [previo,i] = *it;
-    
-    setsito.erase(it);
+    sort(numeritos.begin(),numeritos.end());
 
-    target++;
-    ll lu = 1;
-    while (!setsito.empty())
+
+
+    ll lu =1;
+
+    auto [previo,index] = numeritos[0];
+    
+    for (ll i = 1; i < n; i++)
     {
-        auto it2 = setsito.upper_bound({target,0LL});
-        
-        auto [actual,index] = *it2;
-        // cout<<actual<<" "<<index<<endl;
-        if(index < i){
+        auto [actual,indice] = numeritos[i];
+        if(indice < index){
             lu++;
         }
         previo = actual;
-        i = index;
-        target++;
-
-        setsito.erase(it2);
+        index = indice;
     }
-
+    
     cout<<lu<<endl;
     
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
     
     
     
-
+ 
     return 0;
 }
